@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package pb;
+
+message Test {
+	string name = 1;
+}
+
+service TestService {
+	rpc Do(Test) returns (Test) {}
+}
