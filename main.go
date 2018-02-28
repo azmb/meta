@@ -12,6 +12,7 @@ import (
 
 const bind = "127.0.0.1:9013"
 
+// auth implements credentials.PerRPCCredentials.
 type auth struct{}
 
 func (auth) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
@@ -20,6 +21,7 @@ func (auth) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]s
 
 func (auth) RequireTransportSecurity() bool { return false }
 
+// server implements pb.TestServiceServer.
 type server struct{}
 
 func (*server) Do(ctx context.Context, t *pb.Test) (*pb.Test, error) {
@@ -52,6 +54,7 @@ func serve() {
 
 func dial() {
 	var opts = []grpc.DialOption{
+		// use metadata to pass token
 		grpc.WithPerRPCCredentials(&auth{}),
 		grpc.WithInsecure(),
 	}

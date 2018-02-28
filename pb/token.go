@@ -10,6 +10,7 @@ import (
 )
 
 const (
+	// Token contains `\n` this violates HTTP2 protocol.
 	Token    = "important\n"
 	TokenKey = "token"
 )
