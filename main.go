@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-const bind = ":9013"
+const bind = "127.0.0.1:9013"
 
 type auth struct{}
 
@@ -56,7 +56,7 @@ func dial() {
 		grpc.WithInsecure(),
 	}
 
-	conn, err := grpc.Dial("localhost"+bind, opts...)
+	conn, err := grpc.Dial(bind, opts...)
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
